@@ -1,6 +1,4 @@
-class Productos {
-    constructor() {
-        this.productos = [
+productos = [
                 {
                     title: 'Six-Pack Quilmes',
                     price: 1100,
@@ -20,72 +18,6 @@ class Productos {
                     // id: 3
                 }
           ];
-        this.id = 0;
-    }
+        id = 0;
 
-    save({ title, price, thumbnail }) {
-        try {
-            let productos = this.getAll();
-            
-            let id = 1;
-            if (productos.length > 0) {
-                console.log("Has elegido el producto nro " + productos.length);
-                id = productos[productos.length - 1].id + 1;
-                console.log(id);
-                
-            }
-
-            productos.push({  title, price, thumbnail, id:id });
-            console.log(`El producto nro ${id} se ha agregado`);
-            return id;
-        } catch (error) {
-            console.log(`ERROR: ${error}`);
-        }
-    }
-    getById(id){         
-        const productos = this.getAll()
-        console.log(id)
-        const index = productos.findIndex(p => p.id == id)
-        console.log(index)
-        if (index == -1) {
-            const errorNotFound = {error:'No se ha encontrado el producto'}
-            return errorNotFound;
-        }
-    
-        return this.productos[index]
-    }
-    getAll() {
-        try {
-            let getProductos = this.productos;
-
-            return getProductos;
-        } catch (err) {
-            console.log(`No se han podido obtener los productos. ERROR: ${err}`);
-            return [];
-        }
-    }
-
-    updateById(id,productoNuevo){
-        const productos = this.getAll()
-        const index = productos.findIndex(p => p.id == id)
-        if (index == -1) {
-            throw new Error(`No se ha encontrado el producto con el id ${id}`)
-        }
-        this.productos[index] = {...productoNuevo, id: productos[index].id}
-    }
-
-
-    deleteById(id){
-        const productos = this.getAll()
-        const index = productos.findIndex(p => p.id == id)
-        if (index == -1) {
-            throw new Error(`No se ha encontrado el producto con el id ${id}`)
-        }
-
-        this.productos.splice(index, 1)
-        
-    }
-        
-}
-
-module.exports = Productos;
+module.exports = productos;

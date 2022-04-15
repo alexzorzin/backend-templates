@@ -1,6 +1,6 @@
 const express = require('express');
 const { engine } = require("express-handlebars");
-
+const productos = require('../api/productos');
 
 
 const app = express();
@@ -18,8 +18,15 @@ app.engine( "hbs", engine({ extname: "hbs", defaultLayout: 'index.hbs', layoutsD
 // )
 
 app.set("view engine", "hbs");
-app.set('views', '/views');
+app.set('views', './views');
 
+app.get ('/productos', (req,res)=>{
+    res.render('listProductos', {productos})
+})
+app.post('/productos', (req, res) => {
+    productos.push(req.body);
+    res.redirect('/')
+})
 
 
 app.get('/', (req, res) => {

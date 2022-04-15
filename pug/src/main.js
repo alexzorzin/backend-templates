@@ -1,20 +1,18 @@
 const express = require('express');
-const Productos = require('../api/productos');
+const productos = require('../api/productos');
 
 const app = express()
-const importarProductos = new Productos
-const productos = importarProductos.products;
 
 app.use(express.urlencoded({ extended: true }));
 
-app.set('views', './views');
+app.set('views', '../views');
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
     res.render('index', { productos })
 })
 app.get ('/productos', (req,res)=>{
-    res.render('listado', {productos})
+    res.render('listProductos', {productos})
 })
 app.post('/productos', (req, res) => {
     productos.push(req.body);
